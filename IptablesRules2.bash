@@ -1,5 +1,8 @@
 #!/bin/bash 
 
+# This is a script to be used for the Linux Domain Isolation. It incorporates the use
+# of IPtables and IPsec to make the domain isolated and secure.
+
 # Variables for system IP addresses 
 centos01=10.0.5.21
 centos02=10.0.5.6
