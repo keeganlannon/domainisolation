@@ -98,8 +98,10 @@ iptables()
      echo -e "=========================================================\n"
                                   echo -e "Press Enter key to Continue..."
                                    read temp;;
-     7) main;;
+     7) mainmenu;;
      *) echo -e "Wrong Option Selected!"
+        sleep 2
+        iptables;;
     esac
    done
   }
