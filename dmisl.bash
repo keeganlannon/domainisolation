@@ -34,6 +34,8 @@ mainmenu()
                                    echo -e "Press Enter key to Continue..."
                                          read temp;;
      *) echo -e "Wrong Option Selected!"
+        sleep 2
+        mainmenu;;
     esac
    done
  }
