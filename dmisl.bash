@@ -12,7 +12,6 @@ mainmenu()
         do
          clear
     echo -e "You are currently in the main menu, please select one of the following\n
-    echo -e "\nChoose the Option Bellow!\n
     echo -e "   1. Ipsec\n
      2. Iptables\n
      3. Iptables Policies\n
@@ -56,7 +55,7 @@ iptables()
    while [ $opt_iptables != 7 ]
         do
          clear
-    echo -e "\nChoose the Option Bellow!!!\n
+    echo -e "You are currently in the Iptables menu, please select one of the following\n
     echo -e "   1. Save the iptables\n
      2. Status of Iptables\n
      3. Start iptables Services\n
