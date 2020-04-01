@@ -15,7 +15,7 @@ mainmenu()
     echo -e "\nChoose the Option Bellow!!!\n
     echo -e "   1. Ipsec\n
      2. Iptables\n
-     3. Firewall\n
+     3. Iptables Policies\n
      4. Stop iptables Services\n
     read opt_mainmenu
     case $opt_mainmenu in
@@ -30,14 +30,14 @@ mainmenu()
                                   echo -e "Press Enter key to Continue..."
                                        read temp;;
      3) echo -e "=========================================================\n"  
-                 firewall;; 
+                 policies;; 
         echo -e "=========================================================\n"
                                    echo -e "Press Enter key to Continue..."
                                          read temp;;
-     *) echo -e "Wrong Option Selected!!!"
-        esac
-       done
-      }
+     *) echo -e "Wrong Option Selected!"
+    esac
+   done
+ }
 
 ####################################################################################
 ipsec()
@@ -99,13 +99,13 @@ iptables()
                                   echo -e "Press Enter key to Continue..."
                                    read temp;;
      7) main;;
-     *) echo -e "Wrong Option Selected!!!"
+     *) echo -e "Wrong Option Selected!"
     esac
    done
   }
   
 ####################################################################################
-firewall()
+policies()
   {
   
   }
