@@ -16,7 +16,6 @@ mainmenu()
     echo -e "   1. Ipsec\n
      2. Iptables\n
      3. Iptables Policies\n
-     4. Stop iptables Services\n
     read opt_mainmenu
     case $opt_mainmenu in
      1) echo -e "=========================================================\n" 
