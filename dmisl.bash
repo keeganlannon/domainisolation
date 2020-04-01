@@ -12,7 +12,7 @@ mainmenu()
         do
          clear
     echo -e "You are currently in the main menu, please select one of the following\n
-    echo -e "\nChoose the Option Bellow!!!\n
+    echo -e "\nChoose the Option Bellow!\n
     echo -e "   1. Ipsec\n
      2. Iptables\n
      3. Iptables Policies\n
