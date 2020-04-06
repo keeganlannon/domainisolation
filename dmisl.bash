@@ -109,5 +109,21 @@ iptables()
 ####################################################################################
 policies()
   {
-  
+ # This function will be used to set new iptables policies
+ 
+ # Menu that will have 2 options 
+ # Set Connection to another host, or set up internet connectivity
+ 
+ # Connection to another host 
+ 
+ # Ask user for the src IP of the connection 
+ # Set this answer to be a parameter 
+ 
+ # Ask user for the dst IP of the connection 
+ # Set this answer as another parameter
+ 
+ # Ask the user if they would like to set up a connection 
+ # If yes create an iptables rule that adds a rule with the parameters of the src ip and dst ip
+ 
+ 
   }
