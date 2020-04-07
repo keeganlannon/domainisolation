@@ -113,7 +113,9 @@ policies()
  
  # Menu that will have 2 options 
  # Set Connection to another host, or set up internet connectivity
+ # Ask user to select one of the options 
  
+ # Option 1 
  # Connection to another host 
  
  # Ask user for the src IP of the connection 
@@ -124,6 +126,15 @@ policies()
  
  # Ask the user if they would like to set up a connection 
  # If yes create an iptables rule that adds a rule with the parameters of the src ip and dst ip
+ 
+ # Option 2
+ # Create rule for internet connectivity 
+ 
+ # Ask user for IP address of the host 
+ # Set this answer as a parameter 
+ 
+ # Ask user if this host can access the internet 
+ # If yes create an iptables rule that allows the host to communicate with the internet
  
  
   }
