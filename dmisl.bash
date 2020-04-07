@@ -43,6 +43,57 @@ mainmenu()
 ipsec()
  {
  
+ # Set up Submenu for ipsec with following options:
+    # Start ipsec, stop ipsec, restart ipsec, setup new ipsec, test ipsec specific, test ipsec all
+ 
+    # Option 1
+       # Systemctl start ipsec
+
+    # Option 2
+       # Systemctl stop ipsec
+
+    # Option 3
+       # Systemctl restart ipsec
+
+    # Option 4
+       # Create two new psks
+       # store them in the pre-labelled variables (left, right)
+       # Have the user input the left source ip and store in variable
+       # Have the user input the left destintation ip and store in variable
+       # Have the user input the right source ip and store in variable
+       # Have the user input the right destintation ip and store in variable
+       # Vim /etc/ipsec.secrets
+            # enter left source left destination: "left psk"
+            # enter right source right destination: "right psk"
+       # Have the user name the new connection file and store in variable
+       # Have the user input connection name and store in variable
+       # Have the user input type and store in variable
+       # Have the user input encryption (ex: aes256-sha2_256!) and store in variable
+       # Vim /etc/ipsec.d/connection_file_variable
+            # config setup
+                # protostack=netkey
+            # enter connection name
+                # authby=psk
+                # auto=route
+                # keyexchnage=ike
+                # left source/24
+                # left source subnet/24
+                # left destination/24
+                # left destination subnet/24
+                # type
+                # esp
+       # Ipsec setup start
+       # ipsec auto -rereadsecrets
+       # ipsec auto -add [connection name]
+       # ipsec auto --up [connection name]
+
+    # Option 5
+       # Have the user input connection name
+       # ipsec auto --up [connection name]
+       
+    # Option 6
+       # ipsec status all
+ 
  }
 
 
