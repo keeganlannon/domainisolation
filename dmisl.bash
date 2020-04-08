@@ -169,23 +169,23 @@ policies()
  # Option 1 
  # Connection to another host 
  
- # Ask user for the src IP of the connection 
- # Set this answer to be a parameter 
+   # Ask user for the src IP of the connection 
+   # Set this answer to be a parameter 
  
- # Ask user for the dst IP of the connection 
- # Set this answer as another parameter
+   # Ask user for the dst IP of the connection 
+   # Set this answer as another parameter
  
- # Ask the user if they would like to set up a connection 
- # If yes create an iptables rule that adds a rule with the parameters of the src ip and dst ip
+   # Ask the user if they would like to set up a connection 
+   # If yes create an iptables rule that adds a rule with the parameters of the src ip and dst ip
  
  # Option 2
  # Create rule for internet connectivity 
  
- # Ask user for IP address of the host 
- # Set this answer as a parameter 
+   # Ask user for IP address of the host 
+   # Set this answer as a parameter 
  
- # Ask user if this host can access the internet 
- # If yes create an iptables rule that allows the host to communicate with the internet
+   # Ask user if this host can access the internet 
+   # If yes create an iptables rule that allows the host to communicate with the internet
  
  
   }
