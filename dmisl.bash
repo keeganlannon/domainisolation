@@ -93,6 +93,10 @@ ipsec()
        
     # Option 6
        # ipsec status all
+       
+    # Option 7
+       # return to main menu
+       # mainmenu;;
  
  }
 
@@ -187,5 +191,8 @@ policies()
    # Ask user if this host can access the internet 
    # If yes create an iptables rule that allows the host to communicate with the internet
  
+ # Option 3
+   # return to main menu
+   # mainmenu;;
  
   }
