@@ -187,8 +187,10 @@ policies()
  
    # Ask user for IP address of the host 
    # Set this answer as a parameter 
+   
  
    # Ask user if this host can access the internet 
+   # If yes ssh into the IP address of the host using the parameter 
    # If yes create an iptables rule that allows the host to communicate with the internet
  
  # Option 3
