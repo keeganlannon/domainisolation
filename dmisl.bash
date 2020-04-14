@@ -42,62 +42,137 @@ mainmenu()
 ####################################################################################
 ipsec()
  {
- 
+   opt_ipsec=1
+   while [ $opt_ipsec != 7 ]
+        do
+         clear
+    echo -e "You are currently in the Ipsec menu, please select one of the following\n
+    echo -e "   1. Start Ipsec\n
+     2. Stop Ipsec\n
+     3. Restart Ipsec\n
+     4. Create New Ipsec Connection\n
+     5. Test Ipsec Connection\n
+     6. Ipsec Status\n
+     7. Return to Main Menu\n
+    read opt_ipsec
+    case $opt_ipsec in
  # Set up Submenu for ipsec with following options:
     # Start ipsec, stop ipsec, restart ipsec, setup new ipsec, test ipsec specific, test ipsec all
  
-    # Option 1
-       # Systemctl start ipsec
+    1) echo -e "=========================================================\n" 
+                 systemctl start ipsec;;
+        echo -e "\n=========================================================\n"
+      echo -e "Press Enter key to Continue..."
+      read temp;;
+    2) echo -e "=========================================================\n" 
+                 systemctl stop ipsec;;
+        echo -e "\n=========================================================\n"
+      echo -e "Press Enter key to Continue..."
+      read temp;;
+    3) echo -e "=========================================================\n" 
+                 systemctl restart ipsec;;
+        echo -e "\n=========================================================\n"
+      echo -e "Press Enter key to Continue..."
+      read temp;;
+    4) echo -e "=========================================================\n" 
+                 # Create two new psks
+                 lftpsk=$(dd if=dev/random count=16 bs=1 | xxd -s)
+                 rghtpsk=$(dd if=dev/random count=16 bs=1 | xxd -s)
+                 
+                 # Have the user input the left source ip and store in variable
+                 read -p "What is the left source IP address?: " lftsrc
+                 
+                 # Have the user input the left source ip subnet and store in variable
+                 read -p "What is the left source IP address?: " lftsrcsub
+                 
+                 # Have the user input the left destintation ip and store in variable
+                 read -p "What is the left destination IP address?: " lftdestsrc
+                 
+                 # Have the user input the left destintation ip subnet and store in variable
+                 read -p "What is the left destination IP address?: " lftdestsub
+                 
+                 # Have the user input the right source ip and store in variable
+                 read -p "What is the right source IP address?: " rghtsrc
+                 
+                 # Have the user input the right destintation ip and store in variable
+                 read -p "What is the right destination IP address?: " rghtdestsrc
+                 
+                 # Enter previous vairables into the ipsec.secrets file
+                 #### FIX THIS ####
+                 ex /etc/ipsec.secrets << EOEX
+                     :i
+                     $lftsrc $lftdst: "$lftpsk"
+                     $rghtsrc $rghtdst: "$rghtpsk"
+                     .
+                     :wq
+                 EOEX
+                     
+                # Have the user name the new connection file and store in variable
+                read -p "What is the name of the file for the new connection?: " connfl
+                
+                # Have the user input connection name and store in variable
+                read -p "What is the name of the new connection?: " connname
+                
+                # Have the user input type and store in variable
+                read -p "What is the type (ex: start)?: " intyp
+                
+                # Have the user input encryption (ex: aes256-sha2_256!) and store in variable
+                read -p "What is the encryption type (ex: aes256-sha2_256!)?: " encrptvar
+                
+                # Set up the new file
+                ###### FIX THIS #####
+                ex /etc/ipsec.d/connfl << EOEX
+                    :i
+                    config setup
+                       protostack=netkey
+                    enter connname
+                       authby=secret
+                      $auto=intyp
+#Double Check this one    #keyexchnage=ike
+                      $lftsrc
+                      $lftsrcsub/24
+                      $lftdest
+                      $lftdestsub/24
+ #Double Check this one   # type
+#Double Check this one    # esp
 
-    # Option 2
-       # Systemctl stop ipsec
-
-    # Option 3
-       # Systemctl restart ipsec
-
-    # Option 4
-       # Create two new psks
-       # store them in the pre-labelled variables (left, right)
-       # Have the user input the left source ip and store in variable
-       # Have the user input the left destintation ip and store in variable
-       # Have the user input the right source ip and store in variable
-       # Have the user input the right destintation ip and store in variable
-       # Vim /etc/ipsec.secrets
-            # enter left source left destination: "left psk"
-            # enter right source right destination: "right psk"
-       # Have the user name the new connection file and store in variable
-       # Have the user input connection name and store in variable
-       # Have the user input type and store in variable
-       # Have the user input encryption (ex: aes256-sha2_256!) and store in variable
-       # Vim /etc/ipsec.d/connection_file_variable
-            # config setup
-                # protostack=netkey
-            # enter connection name
-                # authby=psk
-                # auto=route
-                # keyexchnage=ike
-                # left source/24
-                # left source subnet/24
-                # left destination/24
-                # left destination subnet/24
-                # type
-                # esp
-       # Ipsec setup start
-       # ipsec auto -rereadsecrets
-       # ipsec auto -add [connection name]
-       # ipsec auto --up [connection name]
-
-    # Option 5
-       # Have the user input connection name
-       # ipsec auto --up [connection name]
-       
-    # Option 6
-       # ipsec status all
-       
-    # Option 7
-       # return to main menu
-       # mainmenu;;
- 
+                 # Start up the connection
+                    ipsec setup start
+                    ipsec auto -rereadsecrets
+                    ipsec auto -add $connname
+                    ipsec auto --up $connname
+                ;;
+        echo -e "\n=========================================================\n"
+      echo -e "Press Enter key to Continue..."
+      read temp;;
+    5) echo -e "=========================================================\n" 
+                 # Have the user input connection name
+                 read -p "What is the name of the connection to test?: " connnametest
+                 ipsec auto --up $connnametest
+                 
+                 ;;
+        echo -e "\n=========================================================\n"
+      echo -e "Press Enter key to Continue..."
+      read temp;;
+    6) echo -e "=========================================================\n" 
+                 ipsec status all;;
+        echo -e "\n=========================================================\n"
+      echo -e "Press Enter key to Continue..."
+      read temp;;
+    7) echo -e "=========================================================\n" 
+                 mainmenu;;
+        echo -e "\n=========================================================\n"
+      echo -e "Press Enter key to Continue..."
+      read temp;; 
+    *) echo -e "=========================================================\n" 
+                echo -e "Wrong Option Selected!"
+        sleep 2
+        ipsec;;
+        echo -e "\n=========================================================\n"
+      echo -e "Press Enter key to Continue..."
+      read temp;;
+        esac
+      done
  }
 
 
