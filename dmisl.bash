@@ -163,35 +163,51 @@ iptables()
   
 ####################################################################################
 policies()
-  {
- # This function will be used to set new iptables policies
- 
- # Menu that will have 2 options 
- # Set Connection to another host, or set up internet connectivity
- # Ask user to select one of the options 
- 
- # Option 1 
- # Connection to another host 
- 
-   # Ask user for the src IP of the connection 
-   # Set this answer to be a parameter 
- 
-   # Ask user for the dst IP of the connection 
-   # Set this answer as another parameter
- 
-   # Ask the user if they would like to set up a connection 
-   # If yes create an iptables rule that adds a rule with the parameters of the src ip and dst ip
- 
- # Option 2
- # Create rule for internet connectivity 
- 
-   # Ask user for IP address of the host 
-   # Set this answer as a parameter 
-   
- 
-   # Ask user if this host can access the internet 
-   # If yes ssh into the IP address of the host using the parameter 
-   # If yes create an iptables rule that allows the host to communicate with the internet
+{ 
+# Menu that will have 3 options : Connect to host , connect to internet , and return to main menu
+  echo -e "\t****Set IPTables Policies****/n
+  1. Allow connection to another host
+  2. Allow a host to connect to the internet
+  3. Return to Main Menu"
+  read opt_policies
+  case $opt_policies in 
+  1) host ;; 
+  2) internet ;; 
+  3) mainmenu ;;
+esac
+done 
+fi
+}
+
+# Option 1 , connection to another host 
+host()
+{
+# Ask user for src IP 
+read -p "What is the source IP address?: " src
+# Ask user for dst IP 
+read -p "What is the destination IP address?: " dst
+# Ask user if they would like to set up a connection 
+read -p "Would you like to connect these devices?: " connect
+# if statement
+# if connect = yes ssh into src ip run iptables rules with src and dst ip (INPUT and OUTPUT rules)
+# OUTPUT rules will swap src and dst in iptables format 
+# if connect = yes ssh into dst ip and run same rules
+# src and dst will be in opposite postions as they were for src
+# if connect = no return to policies menu 
+
+
+}
+
+# Option 2 , connect to internet 
+internet()
+{
+# Ask user the host they would like to connect to the internet 
+read -p "What is the IP address of the host you would like to connect to the internet?: " host
+# ssh into the host variable 
+# iptables rule (INPUT and OUTPUT) that would allow access to port 80/443 on that host 
+
+
+}
  
  # Option 3
    # return to main menu
