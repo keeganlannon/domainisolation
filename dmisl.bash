@@ -97,6 +97,8 @@ ipsec()
                  # Have the user input the right destintation ip and store in variable
                  read -p "What is the right destination IP address?: " rghtdestsrc
                  
+                 ## SET UP prompt for server name
+                 
                  # Enter previous vairables into the ipsec.secrets file
                  #### FIX THIS ####
                  ex /etc/ipsec.secrets << EOEX
@@ -117,12 +119,6 @@ ipsec()
                 # Have the user input connection name and store in variable
                 read -p "What is the name of the new connection?: " connname
                 
-                # Have the user input type and store in variable
-                read -p "What is the type (ex: start)?: " intyp
-                
-                # Have the user input encryption (ex: aes256-sha2_256!) and store in variable
-                read -p "What is the encryption type (ex: aes256-sha2_256!)?: " encrptvar
-                
                 # Set up the new file
                 ###### FIX THIS #####
                 ex /etc/ipsec.d/$connfl << EOEX
@@ -130,15 +126,12 @@ ipsec()
                     config setup
                        protostack=netkey
                     enter connname
-                       authby=secret
-                      $auto=intyp
-#Double Check this one    #keyexchnage=ike
+                      authby=secret
+                      auto=start
                       $lftsrc
                       $lftsrcsub/24
                       $lftdest
                       $lftdestsub/24
- #Double Check this one   # type
-#Double Check this one    # esp
                 EOEX
                 
                  # Start up the connection
