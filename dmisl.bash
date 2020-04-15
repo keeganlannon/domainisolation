@@ -97,18 +97,19 @@ ipsec()
                  # Have the user input the right destintation ip and store in variable
                  read -p "What is the right destination IP address?: " rghtdestsrc
                  
-                 ## SET UP prompt for server name
+                 # Have the user input the server name
+                 read -p "What is the server name for this connection?: " servname
                  
                  # Enter previous vairables into the ipsec.secrets file
                  #### FIX THIS ####
                  ex /etc/ipsec.secrets << EOEX
                      :i
-                     ### BEGIN SERVER NAME ###
+                     ### BEGIN $servname ###
                      
                      $lftsrc $lftdst: PSK "$lftpsk"
                      $rghtsrc $rghtdst: PSK "$rghtpsk"
                      
-                     ### END SERVER NAME ###
+                     ### END $servname ###
                      .
                      :wq
                  EOEX
