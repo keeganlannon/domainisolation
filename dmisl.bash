@@ -101,8 +101,12 @@ ipsec()
                  #### FIX THIS ####
                  ex /etc/ipsec.secrets << EOEX
                      :i
-                     $lftsrc $lftdst: "$lftpsk"
-                     $rghtsrc $rghtdst: "$rghtpsk"
+                     ### BEGIN SERVER NAME ###
+                     
+                     $lftsrc $lftdst: PSK "$lftpsk"
+                     $rghtsrc $rghtdst: PSK "$rghtpsk"
+                     
+                     ### END SERVER NAME ###
                      .
                      :wq
                  EOEX
