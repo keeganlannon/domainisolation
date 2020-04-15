@@ -251,7 +251,6 @@ policies()
   3) mainmenu ;;
 esac
 done 
-fi
 }
 
 # Option 1 , connection to another host 
@@ -281,8 +280,8 @@ if [ $connect == 'yes']
 # else return to policies menu
 else 
   policies
-
-
+fi
+done
 }
 
 # Option 2 , connect to internet 
