@@ -121,7 +121,7 @@ ipsec()
                 
                 # Set up the new file
                 ###### FIX THIS #####
-                ex /etc/ipsec.d/connfl << EOEX
+                ex /etc/ipsec.d/$connfl << EOEX
                     :i
                     config setup
                        protostack=netkey
@@ -135,7 +135,8 @@ ipsec()
                       $lftdestsub/24
  #Double Check this one   # type
 #Double Check this one    # esp
-
+                EOEX
+                
                  # Start up the connection
                     ipsec setup start
                     ipsec auto -rereadsecrets
