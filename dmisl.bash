@@ -268,11 +268,11 @@ read -p "Would you like to connect these devices?: " connect
 # src and dst will be in opposite postions as they were for src
 if [ $connect == 'yes']
  then
-    # ssh into src ip
+    ssh root@$src
     iptables -A INPUT -s $src -d $dst -j ACCEPT 
     iptables -A OUTPUT -s $dst -d $src -j ACCEPT 
     exit 
-    # ssh into dst ip 
+    ssh root@$dst 
     iptables -A INPUT -s $dst -d $src -j ACCEPT 
     iptables -A OUTPUT -s $src -d $dst -j ACCEPT 
     exit
@@ -289,7 +289,10 @@ internet()
 # Ask user the host they would like to connect to the internet 
 read -p "What is the IP address of the host you would like to connect to the internet?: " host
 # ssh into the host variable 
+ssh root@$host
 # iptables rule (INPUT and OUTPUT) that would allow access to port 80/443 on that host 
+iptables -A INPUT -p tcp -m multiport --sports 80,443 --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p tcp -m mulitport --sports 80,443 --dport 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
 
 
 }
