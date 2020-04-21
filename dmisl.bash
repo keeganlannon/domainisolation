@@ -97,11 +97,16 @@ ipsec()
                  # Have the user input the right destintation ip and store in variable
                  read -p "What is the right destination IP address?: " rghtdestsrc
                  
+                 # Have the user input the left destintation ip and store in variable
+                 read -p "What is the left destination IP address?: " rghtdestsrc
+                 
+                 # Have the user input the left destintation ip subnet and store in variable
+                 read -p "What is the left destination IP address?: " rghtdestsub
+                 
                  # Have the user input the server name
                  read -p "What is the server name for this connection?: " servname
                  
                  # Enter previous vairables into the ipsec.secrets file
-                 #### FIX THIS ####
                  ex /etc/ipsec.secrets << EOEX
                      :i
                      ### BEGIN $servname ###
@@ -115,25 +120,48 @@ ipsec()
                  EOEX
                      
                 # Have the user name the new connection file and store in variable
-                read -p "What is the name of the file for the new connection?: " connfl
+                read -p "What is the name of the file for the new left connection?: " connflft
                 
                 # Have the user input connection name and store in variable
                 read -p "What is the name of the new connection?: " connname
                 
-                # Set up the new file
-                ###### FIX THIS #####
-                ex /etc/ipsec.d/$connfl << EOEX
+                # Set up the new left file
+                ex /etc/ipsec.d/$connflft << EOEX
                     :i
                     config setup
                        protostack=netkey
                     enter connname
                       authby=secret
                       auto=start
-                      $lftsrc
-                      $lftsrcsub/24
-                      $lftdest
-                      $lftdestsub/24
+                      left=$lftsrc
+                      leftsubnet=$lftsrcsub/24
+                      right=$lftdest
+                      rightsubnet=$lftdestsub/24
                 EOEX
+                
+                # Have the user name the new connection file and store in variable
+                read -p "What is the name of the file for the new right connection?: " connflrght
+                
+                # Set up the new right file
+                ex /etc/ipsec.d/$connflrght << EOEX
+                    :i
+                    config setup
+                       protostack=netkey
+                    enter connname
+                      authby=secret
+                      auto=start
+                      left=$rghtsrc
+                      leftsubnet=$rghtsrcsub/24
+                      right=$rghtdest
+                      rightsubnet=$rghtdestsub/24
+                EOEX
+                
+                # Push config to new host
+                    # Ask for left host that config should be pushed to
+                    # Ask for left host that config should be pushed to
+                    # push config to left host
+                    # push config to right host
+                    # reload ipsec (run ipsec auto -rereadsecrets command) on both hosts
                 
                  # Start up the connection
                     ipsec setup start
