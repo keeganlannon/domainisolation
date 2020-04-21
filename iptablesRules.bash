@@ -47,3 +47,11 @@ iptables -A INPUT -s $centos02 -d $centos01 -p icmp --icmp-type echo-reply -m st
 iptables -A INPUT -s $centos02 -d $centos01 -p icmp --icmp-type echo-request -m state --state NEW,ESTABLISHED,RELATED
 iptables -A OUTPUT -s $centos01 -d $centos02 -p icmp --icmp-type echo-request -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
 iptables -A OUTPUT -s $centos01 -d $centos02 -p icmp --icmp-type echo-reply -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT 
+
+# Allow outgoing ssh in order to push iptables rules to other boxes 
+iptables -A OUTPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+
+# Allow incoming ssh 
+iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
