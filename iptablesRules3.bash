@@ -48,3 +48,6 @@ iptables -A INPUT -s $centos02 -d $centos03 -p icmp --icmp-type echo-request -m 
 iptables -A OUTPUT -s $centos03 -d $centos02 -p icmp --icmp-type echo-request -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
 iptables -A OUTPUT -s $centos03 -d $centos02 -p icmp --icmp-type echo-reply -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
 
+# Allow incoming ssh 
+iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
