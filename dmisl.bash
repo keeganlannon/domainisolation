@@ -79,6 +79,9 @@ ipsec()
                  lftpsk=$(dd if=dev/random count=16 bs=1 | xxd -s)
                  rghtpsk=$(dd if=dev/random count=16 bs=1 | xxd -s)
                  
+                 # Add echo statement here
+                 echo -e "The left host is one side of the ipsec tunnel and the right host is the other side of the tunnel. "
+                 
                  # Have the user input the left source ip and store in variable
                  read -p "What is the left source IP address?: " lftsrc
                  
@@ -158,7 +161,7 @@ ipsec()
                 
                 # Push config to new host
                     # Ask for left host that config should be pushed to
-                    # Ask for left host that config should be pushed to
+                    # Ask for right host that config should be pushed to
                     # push config to left host
                     # push config to right host
                     # reload ipsec (run ipsec auto -rereadsecrets command) on both hosts
