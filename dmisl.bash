@@ -89,19 +89,19 @@ ipsec()
                  read -p "What is the left destination IP address?: " lftdestsrc
                  
                  # Have the user input the left destintation ip subnet and store in variable
-                 read -p "What is the left destination IP address?: " lftdestsub
+                 read -p "What is the left destination subnet address?: " lftdestsub
                  
                  # Have the user input the right source ip and store in variable
                  read -p "What is the right source IP address?: " rghtsrc
                  
                  # Have the user input the right destintation ip and store in variable
-                 read -p "What is the right destination IP address?: " rghtdestsrc
+                 read -p "What is the right destination subnet address?: " rghtsrcsub
                  
                  # Have the user input the left destintation ip and store in variable
-                 read -p "What is the left destination IP address?: " rghtdestsrc
+                 read -p "What is the right destination IP address?: " rghtdestsrc
                  
                  # Have the user input the left destintation ip subnet and store in variable
-                 read -p "What is the left destination IP address?: " rghtdestsub
+                 read -p "What is the right destination subnet address?: " rghtdestsub
                  
                  # Have the user input the server name
                  read -p "What is the server name for this connection?: " servname
