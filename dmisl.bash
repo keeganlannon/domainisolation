@@ -315,7 +315,7 @@ internet()
 read -p "What is the IP address of the host you would like to connect to the internet?: " host
 # ssh into the host variable 
 # iptables rule (INPUT and OUTPUT) that would allow access to port 80/443 on that host 
-ssh root@$host "iptables -A INPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT" ; "iptables -A OUTPUT -p tcp -m multiport --dport 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT"
+ssh root@$host "iptables -A INPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT" ; "iptables -A OUTPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT"
 
 
 }
