@@ -322,6 +322,6 @@ ssh root@$host "iptables -A INPUT -p tcp -m multiport --sports 80,443 --dports 8
  
  # Option 3
    # return to main menu
-   # mainmenu;;
+   mainmenu
  
   }
