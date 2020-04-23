@@ -297,7 +297,7 @@ read -p "Would you like to connect these devices?: " connect
 # OUTPUT rules will swap src and dst in iptables format 
 # if connect = yes ssh into dst ip and run same rules
 # src and dst will be in opposite postions as they were for src
-if [ $connect == 'yes']
+if [ $connect == 'yes' ]
  then
     ssh root@$src "iptables -A INPUT -s $src -d $dst -j ACCEPT" ; "iptables -A OUTPUT -s $dst -d $src -j ACCEPT"
     ssh root@$dst "iptables -A INPUT -s $dst -d $src -j ACCEPT" ; "iptables -A OUTPUT -s $src -d $dst -j ACCEPT"
