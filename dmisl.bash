@@ -18,17 +18,17 @@ mainmenu()
     read opt_mainmenu
     case $opt_mainmenu in
      1) echo -e "=========================================================\n" 
-                 ipsec;;
+                 ipsec
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
      2) echo -e "=========================================================\n"
-                 iptables;; 
+                 iptables
         echo -e "========================================================="
                                   echo -e "Press Enter key to Continue..."
                                        read temp;;
      3) echo -e "=========================================================\n"  
-                 policies;; 
+                 policies
         echo -e "=========================================================\n"
                                    echo -e "Press Enter key to Continue..."
                                          read temp;;
@@ -60,17 +60,17 @@ ipsec()
     # Start ipsec, stop ipsec, restart ipsec, setup new ipsec, test ipsec specific, test ipsec all
  
     1) echo -e "=========================================================\n" 
-                 systemctl start ipsec;;
+                 systemctl start ipsec
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
     2) echo -e "=========================================================\n" 
-                 systemctl stop ipsec;;
+                 systemctl stop ipsec
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
     3) echo -e "=========================================================\n" 
-                 systemctl restart ipsec;;
+                 systemctl restart ipsec
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
