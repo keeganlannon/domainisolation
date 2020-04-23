@@ -299,8 +299,8 @@ read -p "Would you like to connect these devices?: " connect
 # src and dst will be in opposite postions as they were for src
 if [ $connect == 'yes' ]
  then
-    ssh root@$src "iptables -A INPUT -s $src -d $dst -j ACCEPT" ; "iptables -A OUTPUT -s $dst -d $src -j ACCEPT"
-    ssh root@$dst "iptables -A INPUT -s $dst -d $src -j ACCEPT" ; "iptables -A OUTPUT -s $src -d $dst -j ACCEPT"
+    ssh root@$src "iptables -A INPUT -s $dst -d $src -j ACCEPT && iptables -A OUTPUT -s $src -d $dst -j ACCEPT"
+    ssh root@$dst "iptables -A INPUT -s $src -d $dst -j ACCEPT && iptables -A OUTPUT -s $dst -d $src -j ACCEPT"
 # else return to policies menu
 else 
   policies
@@ -315,7 +315,7 @@ internet()
 read -p "What is the IP address of the host you would like to connect to the internet?: " host
 # ssh into the host variable 
 # iptables rule (INPUT and OUTPUT) that would allow access to port 80/443 on that host 
-ssh root@$host "iptables -A INPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT" ; "iptables -A OUTPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT"
+ssh root@$host "iptables -A INPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT && iptables -A OUTPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT"
 
 
 }
