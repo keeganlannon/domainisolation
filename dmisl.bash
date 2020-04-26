@@ -272,7 +272,7 @@ policies()
 # Menu that will have 3 options : Connect to host , connect to internet , and return to main menu
   echo -e "\t****Set IPTables Policies****/n
   1. Allow connection to another host
-  2. Allow a host to connect to the internet
+  2. Allow access to your webserver
   3. Return to Main Menu"
   read opt_policies
   case $opt_policies in 
