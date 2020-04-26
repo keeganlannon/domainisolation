@@ -277,7 +277,7 @@ policies()
   read opt_policies
   case $opt_policies in 
   1) host ;; 
-  2) internet ;; 
+  2) web ;; 
   3) mainmenu ;;
 esac
 
@@ -309,13 +309,19 @@ fi
 }
 
 # Option 2 , connect to internet 
-internet()
+web()
 {
-# Ask user the host they would like to connect to the internet 
-read -p "What is the IP address of the host you would like to connect to the internet?: " host
+# Ask user the IP address of their web server  
+read -p "What is the IP address of your web server?: " webserver
 # ssh into the host variable 
 # iptables rule (INPUT and OUTPUT) that would allow access to port 80/443 on that host 
-ssh root@$host "iptables -A INPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT && iptables -A OUTPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT"
+read -p "Would you like to allow access to your web server? " access
+if [ $access == 'yes' ]
+ then
+     ssh root@$webserver "iptables -A INPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT && iptables -A OUTPUT -p tcp -m multiport --sports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT"
+ else
+   policies 
+ fi   
 
 
 }
