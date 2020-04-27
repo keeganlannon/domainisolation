@@ -123,7 +123,7 @@ ipsec()
                  
                  # Enter previous vairables into the ipsec.secrets file
                  ipsecSecret=/etc/ipsec.secrets
-                     cat <<'ADDSECRET'
+                     (cat <<'ADDSECRET'
                      ### BEGIN $servname ###
                      
                      $lftsrc $lftdst: PSK "$lftpsk"
@@ -159,7 +159,7 @@ ipsec()
                 
                 # Set up the new right file
                 ipsecConfRght=/etc/ipsec.d/$connflrght
-                    (cat <<'ADDIPSECRGHT'
+                (cat <<'ADDIPSECRGHT'
                     config setup
                        protostack=netkey
                     enter connname
