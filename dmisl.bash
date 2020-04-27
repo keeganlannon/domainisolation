@@ -66,7 +66,9 @@ ipsec()
     # Start ipsec, stop ipsec, restart ipsec, setup new ipsec, test ipsec specific, test ipsec all
  
     1) echo -e "=========================================================\n" 
-                 systemctl start ipsec
+                 # Have the user select the right host store in variable
+                 read -p "What is the name of the host to implement the command?: " host
+                 ssh root@$host "systemctl start ipsec"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
