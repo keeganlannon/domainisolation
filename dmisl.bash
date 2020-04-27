@@ -11,10 +11,10 @@ mainmenu()
    while [ $opt_mainmenu != 3 ]
         do
          clear
-    echo -e "You are currently in the main menu, please select one of the following\n
+    echo -e "You are currently in the main menu, please select one of the following\n"
     echo -e "   1. Ipsec\n
      2. Iptables\n
-     3. Iptables Policies\n
+     3. Iptables Policies\n"
     read opt_mainmenu
     case $opt_mainmenu in
      1) echo -e "=========================================================\n" 
