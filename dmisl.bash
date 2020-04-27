@@ -67,18 +67,22 @@ ipsec()
  
     1) echo -e "=========================================================\n" 
                  # Have the user select the right host store in variable
-                 read -p "What is the name of the host to implement the command?: " host
+                 read -p "What is the name of the host (ip address) to implement the command?: " host
                  ssh root@$host "systemctl start ipsec"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
     2) echo -e "=========================================================\n" 
-                 systemctl stop ipsec
+                 # Have the user select the right host store in variable
+                 read -p "What is the name of the host (ip address) to implement the command?: " host
+                 ssh root@$host "systemctl stop ipsec"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
     3) echo -e "=========================================================\n" 
-                 systemctl restart ipsec
+                 # Have the user select the right host store in variable
+                 read -p "What is the name of the host (ip address) to implement the command?: " host
+                 ssh root@$host "systemctl restart ipsec"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
@@ -179,33 +183,37 @@ ipsec()
                     ipsec auto -rereadsecrets
                     ipsec auto -add $connname
                     ipsec auto --up $connname
-                ;;
+                
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
     5) echo -e "=========================================================\n" 
                  # Have the user input connection name
                  read -p "What is the name of the connection to test?: " connnametest
-                 ipsec auto --up $connnametest
                  
-                 ;;
+                 # Have the user select the right host store in variable
+                 read -p "What is the name of the host (ip address) to implement the command?: " host
+                 ssh root@$host "ipsec auto --up $connnametest"
+                 
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
     6) echo -e "=========================================================\n" 
-                 ipsec status all;;
+                 # Have the user select the right host store in variable
+                 read -p "What is the name of the host (ip address) to implement the command?: " host
+                 ssh root@$host "ipsec status all"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
     7) echo -e "=========================================================\n" 
-                 mainmenu;;
+                 mainmenu
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;; 
     *) echo -e "=========================================================\n" 
                 echo -e "Wrong Option Selected!"
         sleep 2
-        ipsec;;
+        ipsec
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
