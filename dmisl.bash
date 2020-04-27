@@ -141,8 +141,8 @@ ipsec()
                 read -p "What is the name of the new connection?: " connname
                 
                 # Set up the new left file
-                ex /etc/ipsec.d/$connflft << EOEX
-                    :i
+                ipsecSecret=/etc/ipsec.d/$connflft
+                (cat <<'ADDIPSEC'
                     config setup
                        protostack=netkey
                     enter connname
@@ -152,7 +152,8 @@ ipsec()
                       leftsubnet=$lftsrcsub/24
                       right=$lftdest
                       rightsubnet=$lftdestsub/24
-                EOEX
+                ADDIPSEC
+                ) > $ipsecSecret
                 
                 # Have the user name the new connection file and store in variable
                 read -p "What is the name of the file for the new right connection?: " connflrght
