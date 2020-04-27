@@ -14,7 +14,8 @@ mainmenu()
     echo -e "You are currently in the main menu, please select one of the following\n"
     echo -e "1. Ipsec\n
      2. Iptables\n
-     3. Iptables Policies\n"
+     3. Iptables Policies\n
+     4. Exit Menu"
     read opt_mainmenu
     case $opt_mainmenu in
      1) echo -e "=========================================================\n" 
@@ -32,6 +33,11 @@ mainmenu()
         echo -e "=========================================================\n"
                                    echo -e "Press Enter key to Continue..."
                                          read temp;;
+      4) echo -e "=========================================================\n"  
+                 exit
+        echo -e "=========================================================\n"
+                                   echo -e "Press Enter key to Continue..."
+                                         read temp;;            
      *) echo -e "Wrong Option Selected!"
         sleep 2
         mainmenu;;
