@@ -122,17 +122,16 @@ ipsec()
                  read -p "What is the server name for this connection?: " servname
                  
                  # Enter previous vairables into the ipsec.secrets file
-                 ex /etc/ipsec.secrets << EOEX
-                     :i
+                 ipsecSecret=/etc/ipsec.secrets
+                     cat <<'ADDSECRET'
                      ### BEGIN $servname ###
                      
                      $lftsrc $lftdst: PSK "$lftpsk"
                      $rghtsrc $rghtdst: PSK "$rghtpsk"
                      
                      ### END $servname ###
-                     .
-                     :wq
-                 EOEX
+                     ADDSECRET
+                     ) > $ipsecSecret
                      
                 # Have the user name the new connection file and store in variable
                 read -p "What is the name of the file for the new left connection?: " connflft
@@ -141,7 +140,7 @@ ipsec()
                 read -p "What is the name of the new connection?: " connname
                 
                 # Set up the new left file
-                ipsecSecret=/etc/ipsec.d/$connflft
+                ipsecConfLft=/etc/ipsec.d/$connflft
                 (cat <<'ADDIPSEC'
                     config setup
                        protostack=netkey
@@ -153,14 +152,14 @@ ipsec()
                       right=$lftdest
                       rightsubnet=$lftdestsub/24
                 ADDIPSEC
-                ) > $ipsecSecret
+                ) > $ipsecConfLft
                 
                 # Have the user name the new connection file and store in variable
                 read -p "What is the name of the file for the new right connection?: " connflrght
                 
                 # Set up the new right file
-                ex /etc/ipsec.d/$connflrght << EOEX
-                    :i
+                ipsecConfRght=/etc/ipsec.d/$connflrght
+                    (cat <<'ADDIPSECRGHT'
                     config setup
                        protostack=netkey
                     enter connname
@@ -170,7 +169,8 @@ ipsec()
                       leftsubnet=$rghtsrcsub/24
                       right=$rghtdest
                       rightsubnet=$rghtdestsub/24
-                EOEX
+                ADDIPSECRGHT
+                ) > $ipsecConfRght
                 
                 # Push config to new host
                     # Ask for left host that config should be pushed to
