@@ -177,16 +177,26 @@ ipsec()
                 
                 # Push config to new host
                     # Ask for left host that config should be pushed to
+                    read -p "What is the ip of the left host that the configs should be pushed to?: " lfthost
+                    
                     # Ask for right host that config should be pushed to
+                    read -p "What is the ip of the right host that the configs should be pushed to?: " rghthost
+                    
                     # push config to left host
+                    scp -q /etc/ipsec.d/$connflft root@$lfthost:/etc/ipsec.d/
+                    scp -q /etc/ipsec.secrets root@$lfthost:/etc/ipsec.d/
+                    
                     # push config to right host
+                    scp -q /etc/ipsec.d/$connflrght root@$rghthost:/etc/ipsec.d/
+                    scp -q /etc/ipsec.secrets root@$rghthost:/etc/ipsec.d/
+                    
                     # reload ipsec (run ipsec auto -rereadsecrets command) on both hosts
-                
+                    ssh root@$lfthost "ipsec auto --rereadsecrets"
+                    ssh root@$rghthost "ipsec auto --rereadsecrets"
+                    
                  # Start up the connection
-                    ipsec setup start
-                    ipsec auto -rereadsecrets
-                    ipsec auto -add $connname
-                    ipsec auto --up $connname
+                    ssh root@$lfthost "ipsec setup start && ipsec auto -rereadsecrets && ipsec auto -add $connname && ipsec auto --up $connname"
+                    ssh root@$rghthost "ipsec setup start && ipsec auto -rereadsecrets && ipsec auto -add $connname && ipsec auto --up $connname"
                 
                 echo -e "Completed"
         echo -e "\n=========================================================\n"
