@@ -69,6 +69,7 @@ ipsec()
                  # Have the user select the correct host to store in the variable
                  read -p "What is the name of the host (ip address) to implement the command?: " host
                  ssh root@$host "systemctl start ipsec"
+                 echo -e "Completed"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
@@ -76,6 +77,7 @@ ipsec()
                  # Have the user select the correct host to store in the variable
                  read -p "What is the name of the host (ip address) to implement the command?: " host
                  ssh root@$host "systemctl stop ipsec"
+                 echo -e "Completed"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
@@ -83,6 +85,7 @@ ipsec()
                  # Have the user select the correct host to store in the variable
                  read -p "What is the name of the host (ip address) to implement the command?: " host
                  ssh root@$host "systemctl restart ipsec"
+                 echo -e "Completed"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
@@ -123,7 +126,7 @@ ipsec()
                  
                  # Enter previous vairables into the ipsec.secrets file
                  ipsecSecret=/etc/ipsec.secrets
-                     (cat <<'ADDSECRET'
+                     (cat <<-ADDSECRET
                      ### BEGIN $servname ###
                      
                      $lftsrc $lftdst: PSK "$lftpsk"
@@ -141,7 +144,7 @@ ipsec()
                 
                 # Set up the new left file
                 ipsecConfLft=/etc/ipsec.d/$connflft
-                (cat <<'ADDIPSEC'
+                (cat <<-ADDIPSEC
                     config setup
                        protostack=netkey
                     enter connname
@@ -159,7 +162,7 @@ ipsec()
                 
                 # Set up the new right file
                 ipsecConfRght=/etc/ipsec.d/$connflrght
-                (cat <<'ADDIPSECRGHT'
+                (cat <<-ADDIPSECRGHT
                     config setup
                        protostack=netkey
                     enter connname
@@ -185,6 +188,7 @@ ipsec()
                     ipsec auto -add $connname
                     ipsec auto --up $connname
                 
+                echo -e "Completed"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
@@ -195,7 +199,7 @@ ipsec()
                  # Have the user select the correct host to store in the variable
                  read -p "What is the name of the host (ip address) to implement the command?: " host
                  ssh root@$host "ipsec auto --up $connnametest"
-                 
+                 echo -e "Completed"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
@@ -203,6 +207,7 @@ ipsec()
                  # Have the user select the correct host to store in the variable
                  read -p "What is the name of the host (ip address) to implement the command?: " host
                  ssh root@$host "ipsec status all"
+                 echo -e "Completed"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
