@@ -52,35 +52,35 @@ ipsec()
    while [ $opt_ipsec != 7 ]
         do
          clear
-    echo -e "You are currently in the Ipsec menu, please select one of the following\n
-    echo -e "   1. Start Ipsec\n
+    echo -e "You are currently in the Ipsec menu, please select one of the following\n"
+    echo -e "1. Start Ipsec\n
      2. Stop Ipsec\n
      3. Restart Ipsec\n
      4. Create New Ipsec Connection\n
      5. Test Ipsec Connection\n
      6. Ipsec Status\n
-     7. Return to Main Menu\n
+     7. Return to Main Menu\n"
     read opt_ipsec
     case $opt_ipsec in
  # Set up Submenu for ipsec with following options:
     # Start ipsec, stop ipsec, restart ipsec, setup new ipsec, test ipsec specific, test ipsec all
  
     1) echo -e "=========================================================\n" 
-                 # Have the user select the right host store in variable
+                 # Have the user select the correct host to store in the variable
                  read -p "What is the name of the host (ip address) to implement the command?: " host
                  ssh root@$host "systemctl start ipsec"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
     2) echo -e "=========================================================\n" 
-                 # Have the user select the right host store in variable
+                 # Have the user select the correct host to store in the variable
                  read -p "What is the name of the host (ip address) to implement the command?: " host
                  ssh root@$host "systemctl stop ipsec"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
       read temp;;
     3) echo -e "=========================================================\n" 
-                 # Have the user select the right host store in variable
+                 # Have the user select the correct host to store in the variable
                  read -p "What is the name of the host (ip address) to implement the command?: " host
                  ssh root@$host "systemctl restart ipsec"
         echo -e "\n=========================================================\n"
@@ -192,7 +192,7 @@ ipsec()
                  # Have the user input connection name
                  read -p "What is the name of the connection to test?: " connnametest
                  
-                 # Have the user select the right host store in variable
+                 # Have the user select the correct host to store in the variable
                  read -p "What is the name of the host (ip address) to implement the command?: " host
                  ssh root@$host "ipsec auto --up $connnametest"
                  
@@ -200,7 +200,7 @@ ipsec()
       echo -e "Press Enter key to Continue..."
       read temp;;
     6) echo -e "=========================================================\n" 
-                 # Have the user select the right host store in variable
+                 # Have the user select the correct host to store in the variable
                  read -p "What is the name of the host (ip address) to implement the command?: " host
                  ssh root@$host "ipsec status all"
         echo -e "\n=========================================================\n"
@@ -233,7 +233,7 @@ iptables()
         do
          clear
     echo -e "You are currently in the Iptables menu, please select one of the following\n"
-    echo -e "   1. Save the iptables\n
+    echo -e "1. Save the iptables\n
      2. Status of Iptables\n
      3. Start iptables Services\n
      4. Stop iptables Services\n
