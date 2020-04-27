@@ -320,7 +320,7 @@ web()
 # Ask user the IP address of their web server  
 read -p "What is the IP address of your web server?: " webserver
 # ssh into the host variable 
-# iptables rule (INPUT and OUTPUT) that would allow access to port 80/443 on that host 
+# iptables rule (INPUT and OUTPUT) that would allow access to port 80/443 
 read -p "Would you like to allow access to your web server? " access
 if [ $access == 'yes' ]
  then
