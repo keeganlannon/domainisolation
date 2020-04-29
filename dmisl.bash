@@ -216,7 +216,7 @@ ipsec()
     6) echo -e "=========================================================\n" 
                  # Have the user select the correct host to store in the variable
                  read -p "What is the name of the host (ip address) to implement the command?: " host
-                 ssh root@$host "ipsec status all"
+                 ssh root@$host "ipsec status"
                  echo -e "Completed"
         echo -e "\n=========================================================\n"
       echo -e "Press Enter key to Continue..."
