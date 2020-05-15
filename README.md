@@ -7,3 +7,4 @@ The Linux Domain Isolation project uses a script that is able to isolate part of
 
 The iptables scripts are a list of iptables rules that would created an isolated domain for devices already connected with an IPsec tunnel. 
 
+This script will have continuous changes and additions. The goal is to have many more options for iptables policies that can be created.
